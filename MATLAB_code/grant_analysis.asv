@@ -1,0 +1,34 @@
+function grant_analysis
+
+fs = '../data/grant_spreadsheet.xlsx';
+
+% Code
+[~,year_sheets] = xlsfinfo(fs);
+
+year_sheets = sort_nat(year_sheets);
+
+for y = 1 : numel(year_sheets)
+    t = readtable(fs, 'Sheet', year_sheets{y});
+    
+    % Pull off status
+    s = t.Status;
+    vi = find(~cellfun(@isempty, s));
+    s = s(vi);
+    
+    f = sum(strcmp(s,'Funded'));
+    
+    out.number_submitted(y) = numel(vi);
+    out.success_rate(y) = f/numel(vi);
+    
+    budget_to_Campbell = t.AvailableT
+    yy= t.AvailableToCampbell(vi)
+    out.dollars_awarded = sum(t.AvailableToCampbell(vi));
+end
+
+out = struct2table(columnize_structure(out));
+
+
+figure(1);
+clf;
+s = stackedplot(out);
+
