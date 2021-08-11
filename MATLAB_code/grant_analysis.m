@@ -24,7 +24,7 @@ for y = 1 : numel(year_sheets)
         budget_to_Campbell = str2num(budget_to_Campbell);
     end
     
-    btc = budget_to_Campbell
+    btc = budget_to_Campbell;
 
     
     % Store
@@ -39,6 +39,9 @@ end
 % 
 out = struct2table(columnize_structure(out));
 out.cum_budget_to_Campbell = cumsum(out.budget_to_Campbell)
+
+% Average success
+success_rate = sum(out.grants_funded) / sum(out.grants_submitted)
 
 
 figure(1);
