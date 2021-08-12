@@ -43,8 +43,12 @@ out.cum_budget_to_Campbell = cumsum(out.budget_to_Campbell)
 % Average success
 success_rate = sum(out.grants_funded) / sum(out.grants_submitted)
 
+a = sum(out.grants_funded)
+b = sum(out.grants_submitted)
+
+
 
 figure(1);
 clf;
-s = stackedplot(out, 'XVariable', 'year','Marker','o');
+s = stackedplot(out, 'XVariable', 'year','Marker','o','FontSize',10);
 
